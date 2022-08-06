@@ -16,14 +16,18 @@
         <h1>Weather Dashboard</h1>
     </header>
     <main>
-        <div class="">
+        <div class="row">
+            <div>
             <h3>Search for a City:</h3>
             <form id="city-form" class="">
                 <label class="" for="city"></label>
                 <input name="cityname" id="cityname" type="text" autofocus="true" class="" />
                 <button type="submit" class="btn">Search</button>
             </form>
-            <div id="history"></div>
+            </div>
+            <div class="">
+                <ul id="history"></ul>
+            </div>
         </div>
         <div>
             <div>
@@ -34,12 +38,8 @@
             <label for="uvi">UV Index: </label><p id="uvi"></p><i></i>
             <div id="forecast"></div>
             </div>
-            <div class="card">
-                <h4 id="date"></h4>
-                <i></i>
-                <label for="temp">Temp: </label><p id="temp"></p>
-                <p>Wind: </p>
-                <p>Humidity: </p>
+            <div id="fiveday" class="row card">
+                <!--5 day forecast goes here--> 
             </div>
         </div>
     </main>
