@@ -1,8 +1,11 @@
 var cityFormEl = document.querySelector("#city-form");
 var cityInputEl = document.querySelector("#cityname");
+var forecast = document.querySelector('#forecast');
 var apiKey = "e76723bec15d4ac7542f1468323edadb";
 // var date = moment.format('l');
 var search_history = [];
+
+
 
 
 function fetchData() {
@@ -17,10 +20,44 @@ function fetchData() {
           
         }).then(function (resultData) {
             console.log(resultData);
-            var foreEl = document.createElement("div");        
-            var fiveday = document.querySelector("#fiveday");
-            var dayone=resultData.list.
-            fiveday.appendChild(foreEl);
+            
+            for (var i = 0; i < resultData.length; i + 5) {
+                var icon = `https://api.openweathermap.org/img/w/${resultData.list[0].weather[0].icon}.png`;
+                var T = resultData.list[5].main.temp;
+                var H = resultData.list[5].main.humidity;
+                var W = resultData.list[5].wind.speed;
+                console.log(icon)
+
+                var col = document.createElement("div");
+                var card = document.createElement('div');
+                var cardBody = document.createElement('div');
+                var cardTitle = document.createElement('h4');
+                var wIcon = document.createElement('img');
+                var tempEl = document.createElement('p');
+                var humEl = document.createElement('p');
+                var windEl = document.createElement('p');
+
+           
+                col.append(card);
+                card.append(cardBody);
+                cardBody.append(cardTitle, wIcon, tempEl, humEl, windEl);
+            
+
+                cardBody.setAttribute('class', 'card-body');
+                cardTitle.setAttribute('class', 'card-title');
+                tempEl.setAttribute('class', 'card-text');
+                humEl.setAttribute('class', 'card-text');
+                windEl.setAttribute('class', 'card-text');
+
+
+                tempEl.textContent = `Temp: ${T}`;
+                humEl.textContent = `Hummiditiy: ${H}`;
+                windEl.textContent = `Wind Speed: ${W}`;
+                wIcon.setAttribute('src', icon);
+            }
+
+forecast.append(col);
+           
         })
     });
 }
