@@ -20,17 +20,32 @@ function fetchData() {
             return result.json();
         }).then(function (resultData) {
             console.log(resultData);
-            document.getElementById('temp').innerText = resultData.current.temp;
-            document.getElementById('wind').innerText = resultData.current.wind_speed;
-            document.getElementById('humidity').innerText = resultData.current.humidity;
+            var currentDate = resultData.current.dt;
+            var currentIcon = `https://api.openweathermap.org/img/w/${resultData.current.weather[0].icon}.png`;
+            var curIcon = document.createElement('img');
+            curIcon.setAttribute('src', currentIcon);
+
+            var curCity = document.getElementById('city')
+            curCity.innerText = `${cityName} ` + `(${moment.unix(currentDate).format('M/D/YYYY')}) `;
+            curCity.append(curIcon);
+            
+            
+            var getTemp = document.getElementById('temp')
+            getTemp.innerText = `${resultData.current.temp}`;
+            var fah = document.createElement('span');
+            fah.innerHTML = "&#8457";
+            getTemp.append(fah);
+
+            document.getElementById('wind').innerText = `${resultData.current.wind_speed}`+ ` MPH`;
+            document.getElementById('humidity').innerText = `${resultData.current.humidity}` + `%`;
             document.getElementById('uvi').innerText = resultData.current.uvi;
             for (var i = 0; i < 5; i++) {
+                var forDay = resultData.daily[i].dt;
                 var icon = `https://api.openweathermap.org/img/w/${resultData.daily[i].weather[0].icon}.png`;
                 var T = resultData.daily[i].temp.day;
                 var H = resultData.daily[i].humidity;
                 var W = resultData.daily[i].wind_speed;
-                console.log(icon)
-            
+                        
                 var col = document.createElement("div");
                 var card = document.createElement('div');
                 var cardBody = document.createElement('div');
@@ -39,6 +54,7 @@ function fetchData() {
                 var tempEl = document.createElement('p');
                 var humEl = document.createElement('p');
                 var windEl = document.createElement('p');
+              
             
                        
                 col.append(card);
@@ -52,43 +68,22 @@ function fetchData() {
                 humEl.setAttribute('class', 'card-text');
                 windEl.setAttribute('class', 'card-text');
             
-            
+                cardTitle.textContent = moment.unix(forDay).format('M/D/YYYY');
                 tempEl.textContent = `Temp: ${T}`;
-                humEl.textContent = `Hummiditiy: ${H}`;
-                windEl.textContent = `Wind Speed: ${W}`;
+                var amp = document.createElement('span');
+                amp.innerHTML = "&#8457";
+                tempEl.append(amp);
+                humEl.textContent = `Hummiditiy: ${H}`+` MPH`;
+                windEl.textContent = `Wind Speed: ${W}`+ ` %`;
                 wIcon.setAttribute('src', icon);
 
                 forecast.append(cardBody);
             }
 
+        }).then(function (resultData) {
+            
         });
     });
 }
-
-
-
-//     var cityName = cityInputEl.value;
-//     fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appId=${apiKey}&limit=20`).then(function (result) {
-//         return result.json();
-//     }).then(function (resultData) {
-//         var firstResult = resultData[0];
-//         fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${firstResult.lat}&lon=${firstResult.lon}&units=imperial&appId=${apiKey}`).then(function (result) {
-//             return result.json();
-//         }).then(function (resultData) {
-//             console.log(resultData);
-//             document.getElementById('temp').innerText = resultData.current.temp;
-//             document.getElementById('wind').innerText = resultData.current.wind_speed;
-//             document.getElementById('humidity').innerText = resultData.current.humidity;
-//             document.getElementById('uvi').innerText = resultData.current.uvi;
-//         })
-//     }).then(function (forecastData) {
-//         var forecastData = forecastData;
-//         fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}`).then(function (forecast) {
-//             console.log(forecast);
-//             return forecast.json();
-//         })
-//         })
-// };
-    
 
 cityFormEl.addEventListener('submit', fetchData);

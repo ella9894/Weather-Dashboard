@@ -1,47 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="Description" content="Enter your description here"/>
-<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="stylesheet" href="assets/css/style.css">
-<title>Weather Dashboard</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="Description" content="Enter your description here" />
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Weather Dashboard</title>
+  </head>
+  <body>
     <header>
-        <h1>Weather Dashboard</h1>
+      <h1>Weather Dashboard</h1>
     </header>
-    <main>
-        <div class="row">
-            <div>
-            <h3>Search for a City:</h3>
-            <form id="city-form" class="">
-                <label class="" for="city"></label>
-                <input name="cityname" id="cityname" type="text" autofocus="true" class="" />
-                <button type="submit" class="btn">Search</button>
-            </form>
-            </div>
-            <div class="">
-                <ul id="history"></ul>
-            </div>
+    <main class="row">
+      <section class="col-lg-2">
+        <div>
+          <h3>Search for a City:</h3>
+          <form id="city-form" class="">
+            <label class="" for="city"></label>
+            <input name="cityname" id="cityname" type="text" autofocus="true" class=""/>
+              <br>
+            <button type="submit" class="btn">Search</button>
+          </form>
+        </div>
+        <div class="">
+          <ul id="history"></ul>
+        </div>
+      </section>
+      <section class="col-lg-10 weather">
+        <div class="display">
+          <h3 id="city"></h3>
+          <label for="temp">Temp: <span id="temp"></span></label>
+          <br>
+          <label for="wind">Wind: <span id="wind"></span></label>
+          <br>
+          <label for="humidity">Humidity: <span id="humidity"></span></label>
+          <br>
+          <label for="uvi">UV Index: <span id="uvi"></span></label>
         </div>
         <div>
-            <div>
-            <h3 id="city"></h3>
-            <label for="temp">Temp: </label><p id="temp"></p>
-            <label>Wind: </label><p id="wind">MPH</p>
-            <label for="humidity">Humidity: </label><p id="humidity">%</p>
-            <label for="uvi">UV Index: </label><p id="uvi"></p><i></i>
-            <div id="forecast"></div>
-            </div>
-            
+          <h3>5-Day Forecast:</h3>
+              <div id="forecast"></div>
         </div>
+      </section>
     </main>
-
-<script src="./assets/js/script.js"></script>
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+  </body>
 </html>
+
+
