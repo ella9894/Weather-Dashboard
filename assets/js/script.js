@@ -2,10 +2,9 @@ var cityFormEl = document.querySelector("#city-form");
 var cityInputEl = document.querySelector("#cityname");
 var forecast = document.querySelector('#forecast');
 var apiKey = "e76723bec15d4ac7542f1468323edadb";
-// var date = moment.format('l');
-var search_history = [];
-
-
+var cityArray = JSON.parse(localStorage.getItem("cityData")) || [];
+var history = document.getElementById('history');
+var clear = document.getElementById('clear');
 
 
 function fetchData() {
@@ -18,7 +17,7 @@ function fetchData() {
         var firstResult = resultData[0];
         fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${firstResult.lat}&lon=${firstResult.lon}&units=imperial&exclude=minutely,hourly&appid=${apiKey}`).then(function (result) {
             return result.json();
-        }).then(function (resultData) {
+        }).then(function getWeather(resultData) {
             console.log(resultData);
             var currentDate = resultData.current.dt;
             var currentIcon = `https://api.openweathermap.org/img/w/${resultData.current.weather[0].icon}.png`;
@@ -36,7 +35,7 @@ function fetchData() {
             fah.innerHTML = "&#8457";
             getTemp.append(fah);
 
-            document.getElementById('wind').innerText = `${resultData.current.wind_speed}`+ ` MPH`;
+            document.getElementById('wind').innerText = `${resultData.current.wind_speed}` + ` MPH`;
             document.getElementById('humidity').innerText = `${resultData.current.humidity}` + `%`;
             document.getElementById('uvi').innerText = resultData.current.uvi;
             for (var i = 0; i < 5; i++) {
@@ -73,17 +72,96 @@ function fetchData() {
                 var amp = document.createElement('span');
                 amp.innerHTML = "&#8457";
                 tempEl.append(amp);
-                humEl.textContent = `Hummiditiy: ${H}`+` MPH`;
-                windEl.textContent = `Wind Speed: ${W}`+ ` %`;
+                humEl.textContent = `Hummiditiy: ${H}` + ` MPH`;
+                windEl.textContent = `Wind Speed: ${W}` + ` %`;
                 wIcon.setAttribute('src', icon);
 
                 forecast.append(cardBody);
             }
+            var saveCity = { curCity, forecast };
+            cityArray.push(saveCity);
+            localStorage.setItem("cityData", JSON.stringify(cityArray));
 
-        }).then(function (resultData) {
+            $('#search').on("click", function (event) {
+                event.preventDefault();
             
+                var city = $('#cityName').val().trim();
+                getWeather(city);
+                if (!cityArray.includes(city)) {
+                    cityArray.push(city);
+                    var pastCity = $(`<li class="list-group-item">${city}</li>`);
+                    $("#history").append(pastCity);
+                };
+                localStorage.setItem("cityData", JSON.stringify(cityArray));
+                console.log(cityArray);
+            });
+            
+            $(document).on("click", ".list-group-item", function () {
+                var cityList = $(this).text();
+                getWeather(cityList);
+            });
+            
+            $(document).ready(function () {
+                if (cityArray !== null) {
+                    var cityIndex = cityArray.length - 1;
+                    var lastCity = cityArray[cityIndex];
+                    getWeather(lastCity);
+                }
+            });
+
         });
+        // .then(function displayHistory(event) {
+        //     history.innerHTML = '';
+
+        //     for (i = 0; i < cityArray.length; i++) {
+        //         var pastCity = document.createElement("button");
+        //         pastCity.setAttribute("style", "width:100%");
+        //         pastCity.setAttribute("id", "past");
+        //         // pastCity.addClass();
+        //         pastCity.textContent = `${cityArray[i].curCity}`;
+        //         history.append(pastCity);
+        //     };
+        //     var past = event.target;
+
+        //     if (past.matches("#past")) {
+        //         curCity = past.textContent;
+        //         var Url = `https://api.openweathermap.org/data/2.5/onecall?lat=${firstResult.lat}&lon=${firstResult.lon}&units=imperial&exclude=minutely,hourly&appid=${apiKey}`;
+           
+        //         fetch(Url).then(function () {
+        //             var cityInfo = {
+        //                 city: curCity,
+        //                 lon: resultData.lat,
+        //                 lat: resultData.lon
+        //             }
+        //             return cityInfo;
+        //         }).then(function () {
+        //             getWeather(resultData);
+        //         });
+        //     }
+        //     return;
+        // });
     });
-}
+};
+
+// function clearHistory(event) {
+//     event.preventDefault();
+//     var pastSearch = document.getElementById('history');
+
+//     localStorage.removeItem("cityData");
+//     pastSearch.innerHTML = '';
+//     var curConEl = document.getElementById("display");
+//     curConEl.innerHTML = '';
+
+//     var fiveForecast = document.getElementById("forecast");
+//     fiveForecast.innerHTML = '';
+
+//     return;
+// };
+
+
 
 cityFormEl.addEventListener('submit', fetchData);
+// displayHistory();
+// clear.on("click", clearHistory);
+// history.on("click", getPast);
+
