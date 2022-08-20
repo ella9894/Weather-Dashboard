@@ -56,7 +56,19 @@ function fetchData(event, cityFromList) {
             uvNumber=resultData.current.uvi;
             uvIndex.innerText = uvNumber;
 
-         
+            if (uvNumber <= 2) {
+                uvIndex.setAttribute("class", "green");
+            }
+            else if (uvNumber > 2 && uvNumber <= 5) {
+                uvIndex.setAttribute("class", "yellow");
+            } else if (uvNumber > 5 && uvNumber <= 7) {
+                uvIndex.setAttribute("class", "orange");
+            } else if (uvNumber > 7 && uvNumber <= 10) {
+                uvIndex.setAttribute("class", "red");
+            } else {
+                uvIndex.setAttribute("class", "purple");
+            };
+            
           for (var i = 0; i < 5; i++) {
             var forDay = resultData.daily[i].dt;
             var icon = `https://api.openweathermap.org/img/w/${resultData.daily[i].weather[0].icon}.png`;

@@ -11,7 +11,7 @@ The site is for people that want to check the weather in their city or any other
 - Javascript
 - Moment.js
 - jQuery
-- Server-side API-Open Weather API
+- Open Weather API
 
 ## Demo
 
