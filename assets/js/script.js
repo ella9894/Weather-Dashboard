@@ -52,7 +52,11 @@ function fetchData(event, cityFromList) {
             `${resultData.current.wind_speed}` + ` MPH`;
           document.getElementById("humidity").innerText =
             `${resultData.current.humidity}` + `%`;
-          document.getElementById("uvi").innerText = resultData.current.uvi;
+            uvIndex = document.getElementById("uvi");
+            uvNumber=resultData.current.uvi;
+            uvIndex.innerText = uvNumber;
+
+         
           for (var i = 0; i < 5; i++) {
             var forDay = resultData.daily[i].dt;
             var icon = `https://api.openweathermap.org/img/w/${resultData.daily[i].weather[0].icon}.png`;
@@ -88,13 +92,14 @@ function fetchData(event, cityFromList) {
             windEl.textContent = `Wind Speed: ${W}` + ` %`;
             wIcon.setAttribute("src", icon);
 
-            forecast.append(cardBody);
+              forecast.append(cardBody);
+              
           }
 
           if (!cityArray.includes(curCityValue) && !cityFromList) {
            
             var pastCity = $(
-              `<li class="list-group-item">${curCityValue}</li>`
+              `<li class="btn btn-secondary">${curCityValue}</li>`
             );
             $("#history").append(pastCity);
             $(pastCity).on("click", function (event) {
@@ -121,7 +126,7 @@ cityFormEl.addEventListener("submit", fetchData);
 $(document).ready(function () {
   if (cityArray.length) {
     cityArray.forEach(function (city) {
-      var pastCity = $(`<li class="list-group-item">${city}</li>`);
+      var pastCity = $(`<li class="btn btn-secondary">${city}</li>`);
       $("#history").append(pastCity);
 
       $(pastCity).on("click", function (event) {

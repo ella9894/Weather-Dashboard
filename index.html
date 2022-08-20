@@ -26,36 +26,40 @@
     </header>
     <main class="row">
       <section class="col-lg-2">
-        <div>
-          <h3>Search for a City:</h3>
-          <form id="city-form">
-            <label class="" for="city"></label>
-            <input
-              name="city-name"
-              id="city-name"
-              type="text"
-              autofocus="true"
-              class=""
-            />
-            <br />
-            <button type="submit" id="search" class="btn">Search</button>
-          </form>
+        <div class="search-container">
+          <div>
+            <h3 class="search-title">Search for a City:</h3>
+            <form id="city-form">
+              <label class="" for="city"></label>
+              <input
+                name="city-name"
+                id="city-name"
+                type="text"
+                autofocus="true"
+                class="input-bar"
+              />
+              <br />
+              <button type="submit" id="search" class="btn btn-primary">Search</button>
+            </form>
+          </div>
+          <button id="clear" class="btn btn-success">Clear History</button>
         </div>
-        <button id="clear">Clear History</button>
         <ul id="history"></ul>
       </section>
       <section class="col-lg-10 weather">
         <div class="display">
-          <h3 id="city"></h3>
-          <label for="temp">Temp: <span id="temp"></span></label>
-          <br />
-          <label for="wind">Wind: <span id="wind"></span></label>
-          <br />
-          <label for="humidity">Humidity: <span id="humidity"></span></label>
-          <br />
-          <label for="uvi">UV Index: <span id="uvi"></span></label>
+          <div class="current-display">
+            <h3 id="city"></h3>
+            <label for="temp">Temp: <span id="temp"></span></label>
+            <br />
+            <label for="wind">Wind: <span id="wind"></span></label>
+            <br />
+            <label for="humidity">Humidity: <span id="humidity"></span></label>
+            <br />
+            <label for="uvi">UV Index: <span id="uvi"></span></label>
+          </div>
         </div>
-        <div>
+        <div class="fore">
           <h3>5-Day Forecast:</h3>
           <div id="forecast"></div>
         </div>
