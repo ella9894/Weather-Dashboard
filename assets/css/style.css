@@ -26,7 +26,13 @@ header{
     margin-top: 0px;
     margin-right: 65px;
     padding-left: 10px;
+    
 }
+
+.weather {
+    display: none;
+}
+
 #forecast{
     justify-content: space-between;
 }

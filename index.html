@@ -5,9 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="Description" content="Enter your description here" />
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link
+      href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
     <link rel="stylesheet" href="assets/css/style.css" />
     <title>Weather Dashboard</title>
   </head>
@@ -21,8 +30,14 @@
           <h3>Search for a City:</h3>
           <form id="city-form">
             <label class="" for="city"></label>
-            <input name="cityname" id="cityname" type="text" autofocus="true" class=""/>
-              <br>
+            <input
+              name="city-name"
+              id="city-name"
+              type="text"
+              autofocus="true"
+              class=""
+            />
+            <br />
             <button type="submit" id="search" class="btn">Search</button>
           </form>
         </div>
@@ -33,16 +48,16 @@
         <div class="display">
           <h3 id="city"></h3>
           <label for="temp">Temp: <span id="temp"></span></label>
-          <br>
+          <br />
           <label for="wind">Wind: <span id="wind"></span></label>
-          <br>
+          <br />
           <label for="humidity">Humidity: <span id="humidity"></span></label>
-          <br>
+          <br />
           <label for="uvi">UV Index: <span id="uvi"></span></label>
         </div>
         <div>
           <h3>5-Day Forecast:</h3>
-              <div id="forecast"></div>
+          <div id="forecast"></div>
         </div>
       </section>
     </main>
@@ -51,5 +66,3 @@
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
-
-
